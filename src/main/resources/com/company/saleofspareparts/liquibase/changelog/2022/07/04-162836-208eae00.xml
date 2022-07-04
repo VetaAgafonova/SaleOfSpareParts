@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="SaleOfSpareParts">
+        <createTable tableName="PURCHASE_POSITION_FOR_SALE_LINK">
+            <column name="POSITION_FOR_SALE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASEPOSITIONFORSALELINK"/>
+            </column>
+            <column name="PURCHASE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASEPOSITIONFORSALELINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="SaleOfSpareParts">
+        <addForeignKeyConstraint baseColumnNames="PURCHASE_ID" baseTableName="PURCHASE_POSITION_FOR_SALE_LINK"
+                                 constraintName="FK_PURPOSFORSAL_ON_PURCHASE" referencedColumnNames="ID"
+                                 referencedTableName="PURCHASE"/>
+    </changeSet>
+    <changeSet id="3" author="SaleOfSpareParts">
+        <addForeignKeyConstraint baseColumnNames="POSITION_FOR_SALE_ID" baseTableName="PURCHASE_POSITION_FOR_SALE_LINK"
+                                 constraintName="FK_PURPOSFORSA_ON_POSITIONFOR" referencedColumnNames="ID"
+                                 referencedTableName="POSITION_FOR_SALE"/>
+    </changeSet>
+    <changeSet id="4" author="SaleOfSpareParts">
+        <dropForeignKeyConstraint baseTableName="position_for_sale_purchase_link"
+                                  constraintName="fk_posforsalpu_on_positionfor"/>
+    </changeSet>
+    <changeSet id="5" author="SaleOfSpareParts">
+        <dropForeignKeyConstraint baseTableName="position_for_sale_purchase_link"
+                                  constraintName="fk_posforsalpur_on_purchase"/>
+    </changeSet>
+    <changeSet id="6" author="SaleOfSpareParts">
+        <dropTable cascadeConstraints="true" tableName="position_for_sale_purchase_link"/>
+    </changeSet>
+</databaseChangeLog>
