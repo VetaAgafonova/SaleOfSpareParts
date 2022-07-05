@@ -12,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Date;
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ public class Detail {
     @NotNull
     private String name;
 
+    @Positive
     @Column(name = "ITEM_NUMBER", nullable = false)
     @NotNull
     private Integer itemNumber;

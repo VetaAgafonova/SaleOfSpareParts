@@ -1,8 +1,11 @@
 package com.company.saleofspareparts.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -25,12 +29,15 @@ public class Purchase {
     @Id
     private UUID id;
 
+    @OnDeleteInverse(DeletePolicy.UNLINK)
+    @OnDelete(DeletePolicy.UNLINK)
     @JoinTable(name = "PURCHASE_POSITION_FOR_SALE_LINK",
             joinColumns = @JoinColumn(name = "PURCHASE_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "POSITION_FOR_SALE_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<PositionForSale> positionsForSale;
 
+    @Positive
     @Column(name = "AMOUNT", nullable = false)
     @NotNull
     private Integer amount;
