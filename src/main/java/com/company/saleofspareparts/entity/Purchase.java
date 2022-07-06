@@ -44,7 +44,7 @@ public class Purchase {
 
     @Column(name = "DATE_OF_PURCHASE", nullable = false)
     @NotNull
-    private LocalDateTime dateOfPurchase;
+    private LocalDateTime dateOfPurchase = LocalDateTime.now();
 
     @Column(name = "VERSION", nullable = false)
     @Version
@@ -83,10 +83,6 @@ public class Purchase {
 
     public LocalDateTime getDateOfPurchase() {
         return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(LocalDateTime dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
     }
 
     public Integer getAmount() {
@@ -137,9 +133,7 @@ public class Purchase {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+    public void setCreatedDate(Date createdDate) { this.createdDate = createdDate; }
 
     public String getCreatedBy() {
         return createdBy;

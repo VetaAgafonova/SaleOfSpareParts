@@ -46,10 +46,10 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="price"/>
-                <column id="providers"/>
                 <column id="details"/>
+                <column id="providers"/>
                 <column id="amount"/>
+                <column id="price"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

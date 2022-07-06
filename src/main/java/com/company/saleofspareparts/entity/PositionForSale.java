@@ -31,17 +31,6 @@ public class PositionForSale {
     @Id
     private UUID id;
 
-    @PositiveOrZero
-    @Column(name = "PRICE", nullable = false)
-    @NotNull
-    private Double price;
-
-    @OnDeleteInverse(DeletePolicy.CASCADE)
-    @OnDelete(DeletePolicy.UNLINK)
-    @JoinColumn(name = "PROVIDERS_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Provider providers;
-
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @InstanceName
     @OnDelete(DeletePolicy.UNLINK)
@@ -49,10 +38,21 @@ public class PositionForSale {
     @ManyToOne(fetch = FetchType.LAZY)
     private Detail details;
 
+    @OnDeleteInverse(DeletePolicy.CASCADE)
+    @OnDelete(DeletePolicy.UNLINK)
+    @JoinColumn(name = "PROVIDERS_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Provider providers;
+
     @PositiveOrZero
     @Column(name = "AMOUNT", nullable = false)
     @NotNull
     private Integer amount;
+
+    @PositiveOrZero
+    @Column(name = "PRICE", nullable = false)
+    @NotNull
+    private Double price;
 
     @Column(name = "VERSION", nullable = false)
     @Version

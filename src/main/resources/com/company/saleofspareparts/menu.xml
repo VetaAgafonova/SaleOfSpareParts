@@ -11,6 +11,8 @@
               caption="msg://com.company.saleofspareparts.screen.positionforsale/positionForSaleBrowse.menu"/>
         <item screen="Purchase.browse"
               caption="msg://com.company.saleofspareparts.screen.purchase/purchaseBrowse.menu"/>
+        <item screen="PriceComparison.browse"
+              caption="msg://com.company.saleofspareparts.screen.pricecomparison/priceComparisonBrowse.menu"/>
     </menu>
 
 </menu-config>

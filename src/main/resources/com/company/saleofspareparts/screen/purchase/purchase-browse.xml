@@ -42,18 +42,16 @@
                     dataContainer="purchasesDc">
             <actions>
                 <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="amount"/>
+                <column id="amount" visible="false"/>
                 <column id="dateOfPurchase"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="purchasesTable.create"/>
-                <button id="editBtn" action="purchasesTable.edit"/>
                 <button id="removeBtn" action="purchasesTable.remove"/>
             </buttonsPanel>
         </groupTable>
