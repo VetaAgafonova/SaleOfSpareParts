@@ -24,22 +24,30 @@ import java.util.UUID;
 @UiDescriptor("purchase-edit.xml")
 @EditedEntityContainer("purchaseDc")
 public class PurchaseEdit extends StandardEditor<Purchase> {
+
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(PurchaseEdit.class);
-
-
-
-
-
-
-
     UUID idEntity;
-
+    List <PositionForSale> positions;
+    int amountPurchase;
     @Autowired
     private PurchaseService purchaseService;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<Purchase> event) {
         idEntity = event.getEntity().getId();
+    }
+
+    @Subscribe(id = "purchaseDc", target = Target.DATA_CONTAINER)
+    public void onPurchaseDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Purchase> event) {
+        positions =  event.getItem().getPositionsForSale();
+        amountPurchase = event.getItem().getAmount();
+    }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        log.info("onBeforeCommitChanges");
+        purchaseService.amountCheck(positions, amountPurchase);
+        log.info("onBeforeCommitChanges");
     }
 
     @Subscribe("commitAndCloseBtn")

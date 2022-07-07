@@ -18,10 +18,10 @@ public class PurchaseService {
     private DataManager dataManager;
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(PurchaseEdit.class);
 
-    public void amountCheck(List <PositionForSale> positions, int amountForSale){
+    public void amountCheck(List <PositionForSale> positions, int a){
         for(PositionForSale element : positions) {
             log.info("PurchaseServiceFor");
-            if(element.getAmount()<amountForSale){
+            if(element.getAmount()<a){
                 throw new RuntimeException("Amount error");
             }
         }
