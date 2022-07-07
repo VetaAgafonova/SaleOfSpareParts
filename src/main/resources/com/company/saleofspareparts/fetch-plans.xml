@@ -2,4 +2,5 @@
     <fetchPlan entity="PositionForSale" name="positionForSale-fetch-plan" extends="_base">
         <property name="providers" fetchPlan="_base"/>
     </fetchPlan>
+    <fetchPlan entity="Detail" name="detail-fetch-plan" extends="_base"/>
 </fetchPlans>

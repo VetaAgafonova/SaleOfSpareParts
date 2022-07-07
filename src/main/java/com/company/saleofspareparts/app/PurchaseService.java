@@ -4,10 +4,10 @@ import com.company.saleofspareparts.entity.PositionForSale;
 import com.company.saleofspareparts.entity.Purchase;
 import com.company.saleofspareparts.screen.purchase.PurchaseEdit;
 import io.jmix.core.DataManager;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.UUID;
@@ -20,12 +20,10 @@ public class PurchaseService {
 
     public void amountCheck(List <PositionForSale> positions, int a){
         for(PositionForSale element : positions) {
-            log.info("PurchaseServiceFor");
             if(element.getAmount()<a){
                 throw new RuntimeException("Amount error");
             }
         }
-
     }
 
     Purchase loadById(UUID purchaseId) {
@@ -40,13 +38,11 @@ public class PurchaseService {
     public void amountReduction(UUID purchaseId){
         //log.info("PurchaseService");
         Purchase purchase = loadById(purchaseId);
-
         int a = purchase.getAmount();
         int newAmount;
         List <PositionForSale> positions = purchase.getPositionsForSale();
 
         for(PositionForSale element : positions) {
-            //log.info("PurchaseServiceFor");
             newAmount = element.getAmount() - a;
             element.setAmount(newAmount);
             savePositionForSale(element);

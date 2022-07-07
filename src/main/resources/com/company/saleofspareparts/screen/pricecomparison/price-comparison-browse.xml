@@ -6,6 +6,13 @@
     <data readOnly="true">
         <collection id="priceComparisonsDc"
                     class="com.company.saleofspareparts.entity.PriceComparison"/>
+        <collection id="detailsDc" class="com.company.saleofspareparts.entity.Detail" fetchPlan="_base">
+            <loader id="detailsDl">
+                <query>
+                    <![CDATA[select e from Detail e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -24,6 +31,11 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="priceComparisonsTable" spacing="true">
+
+        <entityComboBox
+                id="detailSelector"
+                caption="msg://detailSelector.caption"
+                align="TOP_CENTER" optionsContainer="detailsDc"/>
         <groupTable id="priceComparisonsTable"
                     width="100%"
                     dataContainer="priceComparisonsDc">
