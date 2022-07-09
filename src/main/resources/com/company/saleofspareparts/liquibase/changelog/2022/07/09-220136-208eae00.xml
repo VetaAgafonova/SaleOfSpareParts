@@ -32,16 +32,16 @@
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_POSITION_FOR_SALE"/>
             </column>
-            <column name="PRICE" type="DOUBLE">
+            <column name="DETAILS_ID" type="UUID">
                 <constraints nullable="false"/>
             </column>
             <column name="PROVIDERS_ID" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="DETAILS_ID" type="UUID">
+            <column name="AMOUNT" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="AMOUNT" type="INT">
+            <column name="PRICE" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
             <column name="VERSION" type="INT">
@@ -53,9 +53,6 @@
             <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
             <column name="DELETED_BY" type="VARCHAR(255)"/>
             <column name="DELETED_DATE" type="DATETIME"/>
-            <column name="PURCHASE_ID" type="UUID">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
     <changeSet id="3" author="SaleOfSpareParts">
@@ -106,15 +103,20 @@
         </createTable>
     </changeSet>
     <changeSet id="5" author="SaleOfSpareParts">
-        <createIndex indexName="IDX_POSITIONFORSALE" tableName="POSITION_FOR_SALE">
-            <column name="PURCHASE_ID"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="PURCHASE_ID" baseTableName="POSITION_FOR_SALE"
-                                 constraintName="FK_POSITIONFORSALE_ON_PURCHASE" referencedColumnNames="ID"
-                                 referencedTableName="PURCHASE"/>
+        <createTable tableName="PURCHASE_POSITION_FOR_SALE_LINK">
+            <column name="POSITION_FOR_SALE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASEPOSITIONFORSALELINK"/>
+            </column>
+            <column name="PURCHASE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASEPOSITIONFORSALELINK"/>
+            </column>
+        </createTable>
     </changeSet>
     <changeSet id="6" author="SaleOfSpareParts">
+        <createIndex indexName="IDX_POSITIONFORSALE" tableName="POSITION_FOR_SALE">
+            <column name="DETAILS_ID"/>
+        </createIndex>
+
         <addForeignKeyConstraint baseColumnNames="DETAILS_ID" baseTableName="POSITION_FOR_SALE"
                                  constraintName="FK_POSITIONFORSALE_ON_DETAILS" referencedColumnNames="ID"
                                  referencedTableName="DETAIL"/>
@@ -123,5 +125,15 @@
         <addForeignKeyConstraint baseColumnNames="PROVIDERS_ID" baseTableName="POSITION_FOR_SALE"
                                  constraintName="FK_POSITIONFORSAL_ON_PROVIDERS" referencedColumnNames="ID"
                                  referencedTableName="PROVIDER"/>
+    </changeSet>
+    <changeSet id="8" author="SaleOfSpareParts">
+        <addForeignKeyConstraint baseColumnNames="PURCHASE_ID" baseTableName="PURCHASE_POSITION_FOR_SALE_LINK"
+                                 constraintName="FK_PURPOSFORSAL_ON_PURCHASE" referencedColumnNames="ID"
+                                 referencedTableName="PURCHASE"/>
+    </changeSet>
+    <changeSet id="9" author="SaleOfSpareParts">
+        <addForeignKeyConstraint baseColumnNames="POSITION_FOR_SALE_ID" baseTableName="PURCHASE_POSITION_FOR_SALE_LINK"
+                                 constraintName="FK_PURPOSFORSA_ON_POSITIONFOR" referencedColumnNames="ID"
+                                 referencedTableName="POSITION_FOR_SALE"/>
     </changeSet>
 </databaseChangeLog>

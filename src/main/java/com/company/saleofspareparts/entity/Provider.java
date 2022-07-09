@@ -11,6 +11,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
@@ -24,15 +26,21 @@ public class Provider {
     @Id
     private UUID id;
 
+    @NotBlank
+    @NotEmpty
     @InstanceName
     @Column(name = "NAME", nullable = false)
     @NotNull
     private String name;
 
+    @NotBlank
+    @NotEmpty
     @Column(name = "ADDRESS", nullable = false)
     @NotNull
     private String address;
 
+    @NotBlank
+    @NotEmpty
     @Column(name = "PHONE", nullable = false, length = 12)
     @NotNull
     private String phone;

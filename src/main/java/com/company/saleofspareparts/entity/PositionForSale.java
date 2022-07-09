@@ -4,7 +4,6 @@ import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -31,17 +30,17 @@ public class PositionForSale {
     @Id
     private UUID id;
 
+    @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @InstanceName
-    @OnDelete(DeletePolicy.UNLINK)
-    @JoinColumn(name = "DETAILS_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DETAILS_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Detail details;
 
+    @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
-    @OnDelete(DeletePolicy.UNLINK)
-    @JoinColumn(name = "PROVIDERS_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROVIDERS_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Provider providers;
 
     @PositiveOrZero
