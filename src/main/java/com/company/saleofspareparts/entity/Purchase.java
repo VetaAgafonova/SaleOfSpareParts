@@ -31,6 +31,7 @@ public class Purchase {
     @Id
     private UUID id;
 
+    @InstanceName
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
     @JoinTable(name = "PURCHASE_POSITION_FOR_SALE_LINK",
@@ -161,9 +162,8 @@ public class Purchase {
         this.id = id;
     }
 
-    @InstanceName
-    @DependsOnProperties({"dateOfPurchase"})
+    @DependsOnProperties({"positionsForSale"})
     public String getInstanceName() {
-        return String.format("%s", dateOfPurchase);
+        return String.format("%s", positionsForSale);
     }
 }
