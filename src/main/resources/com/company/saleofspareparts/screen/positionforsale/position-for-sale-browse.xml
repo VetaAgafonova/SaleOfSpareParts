@@ -39,7 +39,7 @@
         </filter>
         <groupTable id="positionForSalesTable"
                     width="100%"
-                    dataContainer="positionForSalesDc">
+                    dataContainer="positionForSalesDc" multiselect="true">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
