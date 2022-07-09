@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://priceComparisonBrowse.caption"
-        focusComponent="priceComparisonsTable">
+        caption="msg://comparePositionForSaleBrowse.caption"
+        focusComponent="positionForSalesTable">
     <data readOnly="true">
-        <collection id="priceComparisonsDc"
-                    class="com.company.saleofspareparts.entity.PriceComparison"/>
+        <collection id="positionForSalesDc"
+                    class="com.company.saleofspareparts.entity.PositionForSale">
+            <loader id="compareDL"/>
+            <fetchPlan extends="_base">
+                <property name="providers" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="positionForSalesDl">
+                <query>
+                    <![CDATA[select e from PositionForSale e]]>
+                </query>
+            </loader>
+        </collection>
         <collection id="detailsDc" class="com.company.saleofspareparts.entity.Detail" fetchPlan="_base">
             <loader id="detailsDl">
                 <query>
@@ -30,21 +40,19 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="priceComparisonsTable" spacing="true">
-
+    <layout expand="positionForSalesTable" spacing="true">
         <entityComboBox
                 id="detailSelector"
-                caption="msg://detailSelector.caption"
-                align="TOP_CENTER" optionsContainer="detailsDc"/>
-        <groupTable id="priceComparisonsTable"
+                align="TOP_CENTER"
+                caption="msg://detailSelector.caption" optionsContainer="detailsDc"/>
+        <groupTable id="positionForSalesTable"
                     width="100%"
-                    dataContainer="priceComparisonsDc">
+                    dataContainer="positionForSalesDc">
             <columns>
-                <column id="detailId" visible="false"/>
-                <column id="detailName"/>
-                <column id="providersName"/>
-                <column id="price"/>
+                <column id="details"/>
+                <column id="providers"/>
                 <column id="amount"/>
+                <column id="price"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
