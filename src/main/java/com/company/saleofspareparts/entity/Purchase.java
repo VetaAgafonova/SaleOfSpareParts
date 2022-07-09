@@ -6,6 +6,8 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -157,5 +159,11 @@ public class Purchase {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @InstanceName
+    @DependsOnProperties({"dateOfPurchase"})
+    public String getInstanceName() {
+        return String.format("%s", dateOfPurchase);
     }
 }

@@ -42,7 +42,17 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
     AppUI context;
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
-        purchaseService.amountCheck(positions, amountPurchase);
+        //try {
+            purchaseService.amountCheck(positions, amountPurchase);
+       /* }catch (RuntimeException e){
+            dialogs.createExceptionDialog()
+                    .withCaption("Alert")
+                    .withMessage("Division by zero")
+                    .withThrowable(e.fillInStackTrace())
+                    .show();
+            event.preventCommit();
+        }
+        */
     }
 
     @Subscribe("commitAndCloseBtn")
